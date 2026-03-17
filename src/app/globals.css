@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green: #00ff41;
+  --darkgreen: #00cc33;
+  --cyan: #00e5ff;
+  --amber: #ffb300;
+  --bg: #0a0a0a;
+  --card: #111111;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--green) var(--bg);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--darkgreen);
+  border-radius: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: #e0e0e0;
+  font-family: "Inter", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: #00ff41;
+}
+
+/* Scan line overlay effect */
+.scan-overlay::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 65, 0.05),
+    transparent
+  );
+  animation: scanLine 8s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* CRT flicker effect (subtle) */
+.crt-flicker {
+  animation: crtFlicker 0.15s infinite;
+}
+
+@keyframes crtFlicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.98; }
+  15% { opacity: 0.96; }
+  100% { opacity: 0.97; }
+}
+
+/* Terminal prompt styling */
+.terminal-prompt::before {
+  content: "$ ";
+  color: var(--green);
+  font-family: "Fira Code", monospace;
+  font-weight: 600;
+}
+
+/* Glowing text */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 20px rgba(0, 255, 65, 0.3),
+    0 0 40px rgba(0, 255, 65, 0.1);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5), 0 0 20px rgba(0, 229, 255, 0.3);
+}
+
+/* Card glow on hover */
+.card-glow {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 255, 65, 0.1);
+}
+
+.card-glow:hover {
+  border-color: rgba(0, 255, 65, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.1), inset 0 0 15px rgba(0, 255, 65, 0.05);
+}
+
+/* Matrix rain background */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ctext x='0' y='15' fill='%2300ff41' font-family='monospace' font-size='14'%3E0%3C/text%3E%3C/svg%3E");
+  background-size: 20px 20px;
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 65, 0.3),
+    transparent
+  );
+}
+
+/* Typing cursor */
+.typing-cursor::after {
+  content: "█";
+  animation: blink 1s step-end infinite;
+  color: var(--green);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Tag / badge styling */
+.cyber-tag {
+  @apply px-3 py-1 text-xs font-mono rounded border;
+  border-color: rgba(0, 255, 65, 0.3);
+  background: rgba(0, 255, 65, 0.05);
+  color: #00ff41;
+  transition: all 0.2s;
+}
+
+.cyber-tag:hover {
+  background: rgba(0, 255, 65, 0.15);
+  border-color: rgba(0, 255, 65, 0.6);
+}
+
+/* Timeline line */
+.timeline-line {
+  position: relative;
+}
+
+.timeline-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--green), transparent);
+}
+
+/* ============================================================
+   RESPONSIVE & ACCESSIBILITY ADDITIONS
+   ============================================================ */
+
+/* Respect user's reduced-motion preference — disable all animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scan-overlay::before {
+    display: none;
+  }
+}
+
+/* Prevent body scroll when mobile nav is open */
+body.nav-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* Minimum touch target size (WCAG 2.5.5 - 44x44px) */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* Fluid typography: scales smoothly from 320px phones to 1920px+ screens */
+html {
+  font-size: clamp(14px, 1vw + 10px, 18px);
+}
+
+/* Prevent any element from causing horizontal scroll on mobile */
+.no-overflow {
+  overflow-x: hidden;
+  word-break: break-word;
+}
+
+/* Large screen (TV / 4K) content cap */
+.max-w-screen-2xl-safe {
+  max-width: min(100%, 1400px);
+  margin-inline: auto;
+}
+
+/* Safe horizontal padding for all screen sizes */
+.section-px {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
