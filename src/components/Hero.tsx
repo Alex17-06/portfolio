@@ -62,7 +62,7 @@ export default function Hero() {
             <div className="w-3 h-3 rounded-full bg-terminal-amber/80" />
             <div className="w-3 h-3 rounded-full bg-terminal-green/80" />
             <span className="ml-3 text-xs font-mono text-gray-500 truncate">
-              alex@cloud-sec:~
+              alex@m365-admin:~
             </span>
           </div>
 
@@ -77,11 +77,11 @@ export default function Hero() {
             <div className="text-base sm:text-xl 2xl:text-2xl text-terminal-cyan mb-5 sm:mb-6 min-h-[1.75rem]">
               <TypingEffect
                 texts={[
-                  "Cloud & Security Specialist",
-                  "Microsoft 365 Administrator",
-                  "Azure Entra ID Engineer",
-                  "Endpoint Security Analyst",
-                  "Threat Investigation & Response",
+                  "Microsoft 365 & Cloud Systems Administrator",
+                  "Azure Entra ID & Zero Trust Architect",
+                  "Hybrid Identity & Conditional Access",
+                  "Endpoint Security & Defender Specialist",
+                  "Cybersecurity Incident Response",
                 ]}
                 speed={60}
                 deleteSpeed={30}
@@ -92,11 +92,11 @@ export default function Hero() {
               <span className="text-terminal-green">$</span> echo $SUMMARY
               <br />
               <span className="text-gray-300 mt-2 block">
-                Cloud &amp; Security-focused IT Specialist with hands-on experience
-                administering Microsoft 365 and Azure Entra ID in hybrid
-                environments. Strong background in endpoint security, identity
-                and access management, and threat investigation using Microsoft
-                Defender.
+                Microsoft 365 and cloud systems administrator with hands-on
+                experience managing hybrid Microsoft Entra ID environments
+                across a multi-company organization. Led endpoint migration
+                from on-premises AD to Entra ID and designed Zero Trust
+                Conditional Access architecture for 600+ users.
               </span>
             </p>
 

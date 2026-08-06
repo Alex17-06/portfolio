@@ -11,12 +11,10 @@ interface Cert {
 }
 
 const certifications: Cert[] = [
-  { name: "CompTIA Security+", issuer: "CompTIA", date: "May 2025", badge: "🔒", colorClass: "text-terminal-green" },
-  { name: "ISC2 CC (Certified in Cybersecurity)", issuer: "ISC2", date: "October 2024", badge: "🛡️", colorClass: "text-terminal-cyan" },
   { name: "Azure Fundamentals (AZ-900)", issuer: "Microsoft", date: "May 2025", badge: "☁️", colorClass: "text-terminal-cyan" },
+  { name: "CompTIA Security+", issuer: "CompTIA", date: "Expected August 2026", badge: "🔒", colorClass: "text-terminal-green" },
+  { name: "ISC2 CC (Certified in Cybersecurity)", issuer: "ISC2", date: "October 2024", badge: "🛡️", colorClass: "text-terminal-cyan" },
   { name: "Introduction to Cyber Security", issuer: "Cisco", date: "June 2023", badge: "🌐", colorClass: "text-terminal-amber" },
-  { name: "Career Essentials in Cybersecurity", issuer: "Microsoft & LinkedIn", date: "January 2024", badge: "📜", colorClass: "text-terminal-green" },
-  { name: "Meta CTF – Flash CTF", issuer: "MetaCTF", date: "October 2024", badge: "🚩", colorClass: "text-terminal-red" },
 ];
 
 export default function Certifications() {
@@ -28,8 +26,8 @@ export default function Certifications() {
           title="Certifications"
           subtitle="Industry-recognized credentials in cloud and cybersecurity"
         />
-        {/* 1 col → 2 col → 3 col → stays 3 on 2xl (enough for 6 certs) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* 1 col → 2 col on sm+ (4 certs) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {certifications.map((cert) => (
             <div
               key={cert.name}

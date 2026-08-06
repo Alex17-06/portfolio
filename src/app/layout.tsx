@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Alex Philip | Cloud & Security Specialist",
+  title: "Alex Philip | Microsoft 365 & Cloud Systems Administrator",
   description:
-    "Portfolio of Alex Philip — Cloud & Security-focused IT Specialist with expertise in Microsoft 365, Azure, endpoint security, and threat investigation.",
+    "Portfolio of Alex Philip — Microsoft 365 & Cloud Systems Administrator with expertise in Entra ID, Zero Trust, endpoint security, and incident response.",
   keywords: [
     "cybersecurity",
     "cloud security",
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Alex Philip" }],
   openGraph: {
-    title: "Alex Philip | Cloud & Security Specialist",
+    title: "Alex Philip | Microsoft 365 & Cloud Systems Administrator",
     description:
-      "Cloud & Security-focused IT Specialist with hands-on experience in Microsoft 365, Azure Entra ID, and endpoint security.",
+      "Microsoft 365 & Cloud Systems Administrator with hands-on experience managing hybrid Entra ID environments and Zero Trust architecture.",
     type: "website",
   },
 };

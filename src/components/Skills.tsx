@@ -10,47 +10,47 @@ interface SkillCategory {
 
 const skills: SkillCategory[] = [
   {
-    category: "Cloud & Identity",
+    category: "Identity & Access",
+    icon: "🔐",
+    items: [
+      { name: "Microsoft Entra ID (Azure AD)", level: 92 },
+      { name: "Conditional Access / Zero Trust", level: 90 },
+      { name: "MFA / FIDO2 / RBAC", level: 90 },
+      { name: "Hybrid Identity & AD", level: 88 },
+      { name: "Okta", level: 75 },
+    ],
+  },
+  {
+    category: "Microsoft 365",
     icon: "☁️",
     items: [
-      { name: "Azure Entra ID (Azure AD)", level: 90 },
-      { name: "Microsoft 365 Admin", level: 92 },
-      { name: "Conditional Access Policies", level: 85 },
-      { name: "Intune / MDM", level: 88 },
-      { name: "Exchange Online", level: 85 },
+      { name: "Exchange Online", level: 92 },
+      { name: "Teams (incl. Teams Phone)", level: 88 },
+      { name: "SharePoint / OneDrive", level: 88 },
+      { name: "Licensing & Mail Flow", level: 85 },
+      { name: "Intune / MDM / BYOD", level: 88 },
     ],
   },
   {
-    category: "Security & Threat Mgmt",
+    category: "Security",
     icon: "🛡️",
     items: [
-      { name: "Microsoft Defender", level: 88 },
-      { name: "MFA Enforcement", level: 90 },
-      { name: "Phishing Investigation", level: 85 },
-      { name: "Endpoint Hardening", level: 82 },
-      { name: "Incident Response", level: 80 },
+      { name: "Microsoft Defender", level: 90 },
+      { name: "Incident Response", level: 85 },
+      { name: "Threat Investigation", level: 85 },
+      { name: "Endpoint Hardening", level: 85 },
+      { name: "Security Baselines", level: 82 },
     ],
   },
   {
-    category: "Networking & Infra",
+    category: "Cloud & Infrastructure",
     icon: "🌐",
     items: [
+      { name: "Azure (VMs, Networking, VPN)", level: 85 },
+      { name: "Windows Server 2016–2025", level: 85 },
       { name: "DNS / DHCP / TCP/IP", level: 85 },
-      { name: "VPN Troubleshooting", level: 82 },
-      { name: "LAN/WAN Architecture", level: 78 },
-      { name: "Active Directory", level: 88 },
-      { name: "Hardware Diagnostics", level: 85 },
-    ],
-  },
-  {
-    category: "Tools & Platforms",
-    icon: "🔧",
-    items: [
-      { name: "ServiceNow (ITSM)", level: 88 },
-      { name: "Atera RMM", level: 85 },
-      { name: "VMware / Virtualization", level: 78 },
-      { name: "Windows 10/11 Admin", level: 92 },
-      { name: "SharePoint / OneDrive", level: 85 },
+      { name: "Firewalls / LAN / WAN", level: 82 },
+      { name: "Universal Print / Azure Print", level: 80 },
     ],
   },
 ];
@@ -111,10 +111,11 @@ export default function Skills() {
           </p>
           <div className="flex flex-wrap justify-center gap-2 max-w-3xl 2xl:max-w-5xl mx-auto">
             {[
-              "ITIL Practices", "Okta", "Salesforce", "SAP",
-              "Google Authenticator", "GSuite", "Chrome OS", "macOS",
-              "Linux", "iOS / Android", "Remote Access Tools", "Dell Hardware",
-              "Imaging & Deployment", "BYOD", "AV Systems", "Crestron",
+              "PowerShell", "Microsoft Graph", "JSON Reporting",
+              "ServiceNow", "Salesforce", "Atera RMM", "ITIL Practices",
+              "Windows 7/10/11", "macOS", "Linux", "iOS / Android",
+              "Dell Hardware", "Imaging & Deployment", "VDI",
+              "Crestron", "AV Systems",
             ].map((tag) => (
               <span key={tag} className="cyber-tag text-xs sm:text-sm">
                 {tag}

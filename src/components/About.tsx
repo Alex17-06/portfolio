@@ -4,33 +4,33 @@ import SectionHeader from "./SectionHeader";
 
 const highlights = [
   {
-    icon: "🛡️",
-    title: "Endpoint Security",
-    desc: "Microsoft Defender configuration, threat analysis, and device compliance enforcement.",
-  },
-  {
     icon: "☁️",
-    title: "Cloud Administration",
-    desc: "Azure Entra ID, Microsoft 365, Conditional Access, and Intune device management.",
+    title: "M365 & Cloud Admin",
+    desc: "Exchange Online, Teams, SharePoint, OneDrive administration across multi-company organizations.",
   },
   {
     icon: "🔐",
-    title: "Identity & Access",
-    desc: "User provisioning, MFA enforcement, role-based access, and sign-in risk monitoring.",
+    title: "Identity & Zero Trust",
+    desc: "Entra ID, Conditional Access, MFA, FIDO2, RBAC, and hybrid identity management for 600+ users.",
   },
   {
-    icon: "🔍",
-    title: "Threat Investigation",
-    desc: "Phishing response, message tracing, security alert triage, and incident remediation.",
+    icon: "🛡️",
+    title: "Security Operations",
+    desc: "Microsoft Defender, threat investigation, incident response, and endpoint hardening.",
+  },
+  {
+    icon: "🔧",
+    title: "Infra & Automation",
+    desc: "AD-to-Entra migration, PowerShell + Graph automation, Intune MDM, and network infrastructure.",
   },
 ];
 
 const stats = [
   { label: "location", value: "Scarborough, ON" },
-  { label: "current_role", value: "IT Specialist – Cloud & Security", cyan: true },
+  { label: "current_role", value: "Systems Admin & Cloud Security", cyan: true },
   { label: "employer", value: "The Plus Group" },
   { label: "education", value: "Seneca Polytechnic – ECT", cyan: true },
-  { label: "certs", value: "Security+ · ISC2 CC · AZ-900" },
+  { label: "certs", value: "AZ-900 · ISC2 CC · Security+ (in progress)" },
 ];
 
 export default function About() {
@@ -40,7 +40,7 @@ export default function About() {
         <SectionHeader
           command="cat about.md"
           title="About Me"
-          subtitle="Cloud & Security-focused IT Specialist based in the Greater Toronto Area"
+          subtitle="Microsoft 365 & Cloud Systems Administrator based in the Greater Toronto Area"
         />
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-10">
@@ -50,17 +50,19 @@ export default function About() {
               <span className="text-terminal-green">$</span> whoami
             </div>
             <p className="text-gray-300 leading-relaxed mb-4 text-sm sm:text-base">
-              I&apos;m Alex Philip, a Cloud &amp; Security-focused IT Specialist with
-              hands-on experience administering Microsoft 365 and Azure Entra ID
-              in hybrid environments. I specialize in endpoint security, identity
-              and access management, and threat investigation using Microsoft
-              Defender.
+              I&apos;m Alex Philip, a Microsoft 365 and cloud systems administrator
+              with hands-on experience managing hybrid Microsoft Entra ID
+              environments across a multi-company organization. I led the migration
+              of corporate endpoints from on-premises Active Directory to Entra ID
+              and designed Zero Trust Conditional Access architecture spanning MFA,
+              named locations, and session controls.
             </p>
             <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
               Currently at <span className="text-terminal-cyan">The Plus Group</span>,
-              I provide Tier 2–3 support, manage Conditional Access policies,
-              investigate security incidents, and collaborate closely with the CTO
-              on implementing IT policies and security controls.
+              I administer M365 services for 250 users across 6 companies, raised
+              the Microsoft Secure Score from 35% to 80%, and collaborate closely
+              with the CTO on IT policies, security controls, and operational
+              improvements.
             </p>
           </div>
 
