@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import SectionHeader from "./SectionHeader";
+import Reveal from "./Reveal";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
@@ -51,7 +52,7 @@ export default function Contact() {
   };
 
   const inputClasses =
-    "w-full bg-terminal-bg/80 border border-terminal-green/20 rounded px-4 py-3 sm:py-2.5 text-sm font-mono text-gray-200 placeholder:text-gray-600 focus:outline-none focus:border-terminal-green/60 focus:shadow-lg focus:shadow-terminal-green/5 transition-all min-h-[44px]";
+    "w-full bg-terminal-bg/70 border border-slate-700/50 rounded-lg px-4 py-3 sm:py-2.5 text-sm font-mono text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-terminal-cyan/60 focus:shadow-lg focus:shadow-terminal-cyan/10 transition-all min-h-[44px]";
 
   return (
     <section id="contact" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
@@ -64,14 +65,15 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl 2xl:max-w-5xl mx-auto">
           {/* Contact info */}
-          <div className="bg-terminal-card/60 border border-terminal-green/10 rounded-lg p-5 sm:p-6 card-glow">
-            <div className="font-mono text-sm text-gray-500 mb-6">
-              <span className="text-terminal-green">$</span> cat contact_info.json
+          <Reveal>
+          <div className="holo-card h-full p-6 sm:p-7">
+            <div className="font-mono text-sm text-slate-500 mb-6">
+              <span className="text-terminal-cyan">$</span> cat contact_info.json
             </div>
 
             {/* JSON block — overflow scroll on tiny phones instead of breaking layout */}
-            <div className="bg-terminal-bg/60 rounded p-3 sm:p-4 border border-terminal-green/5 mb-4 overflow-x-auto">
-              <pre className="text-gray-300 text-xs sm:text-sm whitespace-pre font-mono">
+            <div className="bg-terminal-bg/60 rounded-lg p-3 sm:p-4 border border-slate-700/40 mb-4 overflow-x-auto">
+              <pre className="text-slate-300 text-xs sm:text-sm whitespace-pre font-mono">
 {`{
   "name":     "Alex Philip",
   "location": "Scarborough, ON",
@@ -85,39 +87,41 @@ export default function Contact() {
             <div className="space-y-1">
               <a
                 href="mailto:alexphilip2121@gmail.com"
-                className="flex items-center gap-3 text-gray-300 hover:text-terminal-green transition-colors group min-h-[44px] text-sm"
+                className="flex items-center gap-3 text-slate-300 hover:text-terminal-cyan transition-colors group min-h-[44px] text-sm"
               >
-                <span className="text-terminal-green text-base shrink-0">📧</span>
+                <span className="text-terminal-cyan text-base shrink-0">📧</span>
                 alexphilip2121@gmail.com
               </a>
               <a
                 href="tel:+14374252630"
-                className="flex items-center gap-3 text-gray-300 hover:text-terminal-green transition-colors group min-h-[44px] text-sm"
+                className="flex items-center gap-3 text-slate-300 hover:text-terminal-cyan transition-colors group min-h-[44px] text-sm"
               >
-                <span className="text-terminal-green text-base shrink-0">📱</span>
+                <span className="text-terminal-cyan text-base shrink-0">📱</span>
                 (437) 425-2630
               </a>
               <a
                 href="https://www.linkedin.com/in/alex-philip-b9aa1a270"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-gray-300 hover:text-terminal-cyan transition-colors group min-h-[44px] text-sm"
+                className="flex items-center gap-3 text-slate-300 hover:text-terminal-cyan transition-colors group min-h-[44px] text-sm"
               >
                 <span className="text-terminal-cyan text-base shrink-0">💼</span>
                 LinkedIn Profile
               </a>
             </div>
           </div>
+          </Reveal>
 
           {/* Form */}
-          <div className="bg-terminal-card/60 border border-terminal-green/10 rounded-lg p-5 sm:p-6 card-glow">
-            <div className="font-mono text-sm text-gray-500 mb-6">
-              <span className="text-terminal-green">$</span> compose_message --to alex
+          <Reveal delay={120}>
+          <div className="holo-card h-full p-6 sm:p-7">
+            <div className="font-mono text-sm text-slate-500 mb-6">
+              <span className="text-terminal-cyan">$</span> compose_message --to alex
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4" noValidate>
               <div>
-                <label htmlFor="contact-name" className="block text-xs font-mono text-gray-500 mb-1">name:</label>
+                <label htmlFor="contact-name" className="block text-xs font-mono text-slate-500 mb-1">name:</label>
                 <input
                   id="contact-name" type="text" required maxLength={100} autoComplete="name"
                   placeholder="John Doe" value={formData.name}
@@ -126,7 +130,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-email" className="block text-xs font-mono text-gray-500 mb-1">email:</label>
+                <label htmlFor="contact-email" className="block text-xs font-mono text-slate-500 mb-1">email:</label>
                 <input
                   id="contact-email" type="email" required maxLength={254} autoComplete="email"
                   placeholder="john@example.com" value={formData.email}
@@ -135,7 +139,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-subject" className="block text-xs font-mono text-gray-500 mb-1">subject:</label>
+                <label htmlFor="contact-subject" className="block text-xs font-mono text-slate-500 mb-1">subject:</label>
                 <input
                   id="contact-subject" type="text" required maxLength={200}
                   placeholder="Cloud Security Opportunity" value={formData.subject}
@@ -144,7 +148,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-message" className="block text-xs font-mono text-gray-500 mb-1">message:</label>
+                <label htmlFor="contact-message" className="block text-xs font-mono text-slate-500 mb-1">message:</label>
                 <textarea
                   id="contact-message" required rows={4} maxLength={5000}
                   placeholder="Your message here..." value={formData.message}
@@ -160,7 +164,11 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full py-3 sm:py-2.5 min-h-[44px] bg-terminal-green/10 border border-terminal-green/40 text-terminal-green font-mono text-sm rounded hover:bg-terminal-green/20 hover:border-terminal-green/60 transition-all hover:shadow-lg hover:shadow-terminal-green/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`w-full min-h-[48px] font-mono text-sm rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                  status === "sent"
+                    ? "bg-terminal-green/15 border border-terminal-green/50 text-terminal-green"
+                    : "btn-primary"
+                }`}
               >
                 {status === "idle" && "> send_message()"}
                 {status === "sending" && "> sending..."}
@@ -169,6 +177,7 @@ export default function Contact() {
               </button>
             </form>
           </div>
+          </Reveal>
         </div>
       </div>
     </section>

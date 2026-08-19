@@ -37,8 +37,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="scan-overlay grid-bg min-h-screen">
-        <div className="matrix-bg" aria-hidden="true" />
+      <body className="scan-overlay min-h-screen">
+        <div className="app-bg" aria-hidden="true" />
+        <div className="app-bg grid-bg" aria-hidden="true" style={{ opacity: 0.5 }} />
         <div className="relative z-10">{children}</div>
       </body>
     </html>

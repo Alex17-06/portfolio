@@ -1,6 +1,7 @@
 "use client";
 
 import SectionHeader from "./SectionHeader";
+import Reveal from "./Reveal";
 
 interface Job {
   title: string;
@@ -73,52 +74,60 @@ export default function Experience() {
         <SectionHeader
           command="git log --oneline --graph"
           title="Work Experience"
-          subtitle="Career timeline in IT support, cloud administration, and security operations"
+          subtitle="Career timeline in cloud administration, systems, and security operations"
         />
 
-        {/* Timeline — reduced left offset on phones */}
         <div className="relative pl-6 sm:pl-8 ml-2 sm:ml-4 timeline-line space-y-8 sm:space-y-10">
           {jobs.map((job, i) => (
-            <div key={i} className="relative">
-              {/* Dot */}
-              <div className="absolute -left-6 sm:-left-8 top-3 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-terminal-bg border-2 border-terminal-green shadow-lg shadow-terminal-green/20" />
-
-              <div className="bg-terminal-card/60 border border-terminal-green/10 rounded-lg p-4 sm:p-6 card-glow">
-                {/* Header — stacks on phone, row on sm+ */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
-                  <div className="min-w-0">
-                    <h3 className="text-base sm:text-lg font-semibold text-terminal-green font-mono leading-snug">
-                      {job.title}
-                    </h3>
-                    <p className="text-terminal-cyan text-sm mt-0.5">
-                      {job.company}
-                      <span className="text-gray-500"> · {job.location}</span>
-                    </p>
-                  </div>
-                  {/* Badges — wrap naturally */}
-                  <div className="flex flex-wrap items-center gap-2 shrink-0">
-                    <span className="text-xs font-mono text-gray-400 bg-terminal-bg/80 border border-terminal-green/10 rounded px-2 py-1 whitespace-nowrap">
-                      {job.period}
-                    </span>
-                    {job.type && (
-                      <span className="text-xs font-mono text-terminal-amber bg-terminal-amber/10 border border-terminal-amber/20 rounded px-2 py-1 whitespace-nowrap">
-                        {job.type}
-                      </span>
-                    )}
-                  </div>
+            <Reveal key={i} delay={i * 80}>
+              <div className="relative">
+                {/* Pulsing node */}
+                <div className="absolute -left-[1.85rem] sm:-left-[2.35rem] top-4">
+                  <span className="relative flex h-4 w-4">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-cyan opacity-40" />
+                    <span className="relative inline-flex rounded-full h-4 w-4 bg-terminal-bg border-2 border-terminal-cyan shadow-glow-cyan" />
+                  </span>
                 </div>
 
-                {/* Bullets */}
-                <ul className="space-y-2">
-                  {job.highlights.map((h, j) => (
-                    <li key={j} className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
-                      <span className="text-terminal-green mt-0.5 shrink-0 font-mono text-xs">&gt;</span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
+                <div className="holo-card p-5 sm:p-7">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+                    <div className="min-w-0">
+                      <h3 className="font-display text-base sm:text-lg font-semibold text-terminal-green leading-snug">
+                        {job.title}
+                      </h3>
+                      <p className="text-terminal-cyan text-sm mt-1">
+                        {job.company}
+                        <span className="text-slate-500"> · {job.location}</span>
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                      <span className="text-xs font-mono text-slate-400 bg-slate-800/60 border border-slate-700/50 rounded px-2 py-1 whitespace-nowrap">
+                        {job.period}
+                      </span>
+                      {job.type && (
+                        <span className="text-xs font-mono text-terminal-amber bg-terminal-amber/10 border border-terminal-amber/20 rounded px-2 py-1 whitespace-nowrap">
+                          {job.type}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <ul className="space-y-2">
+                    {job.highlights.map((h, j) => (
+                      <li
+                        key={j}
+                        className="flex items-start gap-2 text-xs sm:text-sm text-slate-300"
+                      >
+                        <span className="text-terminal-cyan mt-0.5 shrink-0 font-mono text-xs">
+                          ▸
+                        </span>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

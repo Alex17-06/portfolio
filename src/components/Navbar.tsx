@@ -74,7 +74,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-terminal-bg/95 backdrop-blur-md border-b border-terminal-green/20 shadow-lg shadow-terminal-green/5"
+            ? "bg-terminal-bg/80 backdrop-blur-xl border-b border-terminal-cyan/15 shadow-lg shadow-black/40"
             : "bg-transparent"
         }`}
         role="navigation"
@@ -85,10 +85,11 @@ export default function Navbar() {
             {/* Logo */}
             <a
               href="#home"
-              className="font-mono text-terminal-green font-bold text-base sm:text-lg hover:text-glow transition-all min-h-[44px] flex items-center"
+              className="font-display font-bold text-base sm:text-lg transition-all min-h-[44px] flex items-center"
             >
-              <span className="text-terminal-cyan">&gt;</span>&nbsp;alex_philip
-              <span className="animate-cursor-blink">_</span>
+              <span className="text-terminal-cyan">&gt;</span>&nbsp;
+              <span className="grad-text">alex_philip</span>
+              <span className="animate-cursor-blink text-terminal-cyan">_</span>
             </a>
 
             {/* Desktop nav — hidden on mobile/tablet */}
@@ -97,10 +98,10 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-2 text-sm font-mono rounded transition-all min-h-[44px] flex items-center ${
+                  className={`px-3 py-2 text-sm font-mono rounded-md transition-all min-h-[44px] flex items-center ${
                     activeSection === link.href.replace("#", "")
-                      ? "text-terminal-green bg-terminal-green/10"
-                      : "text-gray-400 hover:text-terminal-green hover:bg-terminal-green/5"
+                      ? "text-terminal-cyan bg-terminal-cyan/10 shadow-glow-cyan"
+                      : "text-slate-400 hover:text-terminal-cyan hover:bg-terminal-cyan/5"
                   }`}
                 >
                   {link.label}
@@ -111,7 +112,7 @@ export default function Navbar() {
             {/* Mobile hamburger button — 44×44 touch target */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden text-terminal-green font-mono text-xl min-h-[44px] min-w-[44px] flex items-center justify-center rounded hover:bg-terminal-green/10 transition-all"
+              className="md:hidden text-terminal-cyan font-mono text-xl min-h-[44px] min-w-[44px] flex items-center justify-center rounded hover:bg-terminal-cyan/10 transition-all"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
@@ -125,7 +126,7 @@ export default function Navbar() {
         {mobileOpen && (
           <div
             id="mobile-menu"
-            className="md:hidden bg-terminal-bg/98 backdrop-blur-md border-b border-terminal-green/20"
+            className="md:hidden bg-terminal-bg/95 backdrop-blur-xl border-b border-terminal-cyan/15"
           >
             <div className="px-4 py-2 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
               {navLinks.map((link) => (
@@ -133,7 +134,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center px-3 min-h-[44px] text-sm font-mono text-gray-400 hover:text-terminal-green hover:bg-terminal-green/5 rounded transition-all"
+                  className="flex items-center px-3 min-h-[44px] text-sm font-mono text-slate-400 hover:text-terminal-cyan hover:bg-terminal-cyan/5 rounded transition-all"
                 >
                   {link.label}
                 </a>
