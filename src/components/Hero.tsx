@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import AnimatedCounter from "./AnimatedCounter";
 import Reveal from "./Reveal";
@@ -35,6 +36,18 @@ const stats = [
 ];
 
 export default function Hero() {
+  // Show the transparent video only where VP9-alpha renders correctly.
+  // Safari/iOS don't support alpha WebM, so they keep the transparent still.
+  const [useVideo, setUseVideo] = useState(false);
+
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    const isSafari = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(ua);
+    const isiOS = /iphone|ipad|ipod/i.test(ua);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!isSafari && !isiOS && !reduced) setUseVideo(true);
+  }, []);
+
   return (
     <section id="home" className="relative pt-32 sm:pt-36 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -76,15 +89,29 @@ export default function Hero() {
                 }}
                 aria-hidden="true"
               />
-              <Image
-                src="/hero-cloud.png"
-                alt="Holographic cloud secured by a shield and lock, with cloud architecture, cloud security, threat detection, and risk mitigation callouts"
-                width={1435}
-                height={1096}
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="relative w-full h-auto animate-float-slow"
-              />
+              {useVideo ? (
+                <video
+                  className="relative w-full h-auto animate-float-slow"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/hero-cloud.png"
+                  aria-label="Animated holographic cloud secured by a shield and lock"
+                >
+                  <source src="/hero.webm" type="video/webm" />
+                </video>
+              ) : (
+                <Image
+                  src="/hero-cloud.png"
+                  alt="Holographic cloud secured by a shield and lock, with cloud architecture, cloud security, threat detection, and risk mitigation callouts"
+                  width={1435}
+                  height={1096}
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="relative w-full h-auto animate-float-slow"
+                />
+              )}
             </div>
           </Reveal>
         </div>
