@@ -1,32 +1,8 @@
 "use client";
 
-import HeroGraphic from "./HeroGraphic";
+import Image from "next/image";
 import AnimatedCounter from "./AnimatedCounter";
 import Reveal from "./Reveal";
-
-const floatingCards = [
-  {
-    icon: "🔐",
-    title: "IDENTITY",
-    desc: "Entra ID & Zero Trust",
-    pos: "top-[6%] right-[2%]",
-    delay: "0s",
-  },
-  {
-    icon: "🛡️",
-    title: "THREAT DETECTION",
-    desc: "Defender monitoring & response",
-    pos: "top-[42%] left-[-4%]",
-    delay: "0.8s",
-  },
-  {
-    icon: "📈",
-    title: "SECURE SCORE",
-    desc: "35% → 80% hardened",
-    pos: "bottom-[16%] right-[0%]",
-    delay: "1.4s",
-  },
-];
 
 const features = [
   {
@@ -88,25 +64,27 @@ export default function Hero() {
             </div>
           </Reveal>
 
-          {/* Right graphic with floating cards */}
+          {/* Right graphic — holographic cloud/shield */}
           <Reveal delay={150}>
             <div className="relative">
-              <HeroGraphic />
-              {floatingCards.map((c) => (
-                <div
-                  key={c.title}
-                  className={`absolute ${c.pos} card-flat px-3.5 py-2.5 backdrop-blur-md animate-float hidden sm:flex items-center gap-2.5 max-w-[190px]`}
-                  style={{ animationDelay: c.delay }}
-                >
-                  <span className="text-lg shrink-0">{c.icon}</span>
-                  <span className="flex flex-col leading-tight">
-                    <span className="font-mono text-[0.6rem] tracking-wider text-brand-light font-semibold">
-                      {c.title}
-                    </span>
-                    <span className="text-[0.7rem] text-slate-400">{c.desc}</span>
-                  </span>
-                </div>
-              ))}
+              {/* soft glow behind */}
+              <div
+                className="absolute inset-0 blur-3xl opacity-40 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(circle at 50% 45%, rgba(47,107,255,0.4), transparent 60%)",
+                }}
+                aria-hidden="true"
+              />
+              <Image
+                src="/hero-cloud.png"
+                alt="Holographic cloud secured by a shield and lock, with cloud architecture, cloud security, threat detection, and risk mitigation callouts"
+                width={1435}
+                height={1096}
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="relative w-full h-auto animate-float-slow"
+              />
             </div>
           </Reveal>
         </div>
