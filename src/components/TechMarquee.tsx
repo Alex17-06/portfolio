@@ -13,13 +13,13 @@ const logos = [
 
 function LogoTile({ name, src }: { name: string; src: string }) {
   return (
-    <div className="card-flat flex items-center justify-center h-20 sm:h-24 w-44 sm:w-52 shrink-0 px-6 grayscale-[35%] hover:grayscale-0 transition-all duration-300">
+    <div className="card-flat flex items-center justify-center h-20 sm:h-24 w-44 sm:w-52 shrink-0 px-6 grayscale-[35%] hover:grayscale-0 hover:-translate-y-1 hover:border-brand-blue/40 transition-all duration-300">
       <Image
         src={src}
         alt={name}
         width={200}
         height={80}
-        className="max-h-10 sm:max-h-12 w-auto object-contain"
+        className="max-h-10 sm:max-h-12 w-auto object-contain transition-transform duration-300 hover:scale-110"
       />
     </div>
   );

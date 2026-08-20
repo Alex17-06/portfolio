@@ -66,25 +66,27 @@ export default function Hero() {
 
           {/* Right graphic — holographic cloud/shield */}
           <Reveal delay={150}>
-            <div className="relative">
-              {/* soft glow behind */}
+            <div className="relative group cursor-pointer">
+              {/* soft glow behind — intensifies on hover */}
               <div
-                className="absolute inset-0 blur-3xl opacity-50 pointer-events-none"
+                className="absolute inset-0 blur-3xl opacity-50 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none"
                 style={{
                   background:
                     "radial-gradient(circle at 50% 45%, rgba(47,107,255,0.45), transparent 62%)",
                 }}
                 aria-hidden="true"
               />
-              <Image
-                src="/hero-cloud.png"
-                alt="Holographic cloud secured by a shield and lock, with cloud architecture, cloud security, threat detection, and risk mitigation callouts"
-                width={1435}
-                height={1096}
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="relative w-full h-auto animate-float-slow"
-              />
+              <div className="relative transition-transform duration-500 ease-out group-hover:scale-[1.04]">
+                <Image
+                  src="/hero-cloud.png"
+                  alt="Holographic cloud secured by a shield and lock, with cloud architecture, cloud security, threat detection, and risk mitigation callouts"
+                  width={1435}
+                  height={1096}
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="w-full h-auto animate-float-slow transition-[filter] duration-500 group-hover:brightness-110"
+                />
+              </div>
             </div>
           </Reveal>
         </div>

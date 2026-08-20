@@ -152,22 +152,24 @@ function StrengthBar({ name, level }: { name: string; level: number }) {
 
 function IdentityHologram() {
   return (
-    <div className="relative w-full max-w-[620px] lg:max-w-[760px] mx-auto lg:-my-8" aria-hidden="true">
+    <div className="relative w-full max-w-[620px] lg:max-w-[760px] mx-auto lg:-my-8 group cursor-pointer" aria-hidden="true">
       <div
-        className="absolute inset-0 blur-3xl opacity-50 pointer-events-none"
+        className="absolute inset-0 blur-3xl opacity-50 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none"
         style={{
           background:
             "radial-gradient(circle at 50% 45%, rgba(47,107,255,0.4), transparent 62%)",
         }}
       />
-      <Image
-        src="/experience-shield.png"
-        alt=""
-        width={1449}
-        height={1085}
-        sizes="(max-width: 1024px) 100vw, 45vw"
-        className="relative w-full h-auto animate-float-slow"
-      />
+      <div className="relative transition-transform duration-500 ease-out group-hover:scale-[1.04]">
+        <Image
+          src="/experience-shield.png"
+          alt=""
+          width={1449}
+          height={1085}
+          sizes="(max-width: 1024px) 100vw, 45vw"
+          className="w-full h-auto animate-float-slow transition-[filter] duration-500 group-hover:brightness-110"
+        />
+      </div>
     </div>
   );
 }
