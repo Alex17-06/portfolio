@@ -1,317 +1,255 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --green: #00ff9c;
-  --darkgreen: #00cc7a;
-  --cyan: #22d3ee;
-  --azure: #3b82f6;
-  --sky: #38bdf8;
-  --teal: #2dd4bf;
-  --violet: #8b5cf6;
-  --amber: #ffb300;
-  --bg: #050810;
-  --card: #0b1020;
+  --blue: #2f6bff;
+  --bright: #3b82f6;
+  --light: #60a5fa;
+  --bg: #05070f;
+  --card: #0d1526;
+  --border: #1c2740;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--cyan) var(--bg);
+  scrollbar-color: var(--blue) var(--bg);
 }
-
 *::-webkit-scrollbar {
   width: 8px;
 }
-
 *::-webkit-scrollbar-track {
   background: var(--bg);
 }
-
 *::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--teal), var(--azure));
+  background: linear-gradient(var(--blue), var(--bright));
   border-radius: 4px;
 }
 
 html {
   scroll-behavior: smooth;
+  font-size: clamp(14px, 1vw + 10px, 18px);
 }
 
 body {
   background-color: var(--bg);
-  color: #cbd5e1;
+  color: #94a3b8;
   font-family: "Inter", system-ui, sans-serif;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.3);
-  color: #22d3ee;
+  background: rgba(47, 107, 255, 0.35);
+  color: #dbeafe;
 }
 
 .font-display {
-  font-family: "Orbitron", "Fira Code", monospace;
-  letter-spacing: 0.02em;
+  font-family: "Sora", "Inter", sans-serif;
 }
 
 /* ============================================================
-   ANIMATED BACKGROUND — cloud/cyber command center
+   BACKGROUND — deep navy with blue glows
    ============================================================ */
-
-/* Deep gradient base with slow drift */
-.app-bg {
+.sbd-bg {
   position: fixed;
   inset: 0;
   z-index: 0;
+  pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(59, 130, 246, 0.12), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(139, 92, 246, 0.1), transparent 55%),
-    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(45, 212, 191, 0.1), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 78% 8%, rgba(47, 107, 255, 0.18), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 10% 30%, rgba(37, 99, 235, 0.1), transparent 55%),
+    radial-gradient(ellipse 80% 60% at 50% 105%, rgba(56, 189, 248, 0.08), transparent 60%),
     var(--bg);
-  pointer-events: none;
 }
 
-/* Moving grid floor — perspective HUD */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
-  background-size: 44px 44px;
-}
-
-/* Scan line overlay */
-.scan-overlay::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(34, 211, 238, 0.06),
-    transparent
-  );
-  animation: scanLine 9s linear infinite;
-  pointer-events: none;
-  z-index: 100;
-}
-
-/* Floating particles container drift */
-.drift {
-  animation: float 6s ease-in-out infinite;
+.dot-grid {
+  background-image: radial-gradient(rgba(47, 107, 255, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 /* ============================================================
-   GLASSMORPHISM CARDS + HUD PANELS
+   SECTION LABEL — "— CLOUD & CYBER SECURITY"
    ============================================================ */
-
-.glass {
-  background: rgba(11, 16, 32, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Fira Code", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4f8bff;
+}
+.label::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2f6bff);
 }
 
-.glass:hover {
-  border-color: rgba(34, 211, 238, 0.4);
-  box-shadow:
-    0 0 0 1px rgba(34, 211, 238, 0.15),
-    0 12px 40px rgba(3, 8, 24, 0.6),
-    0 0 30px rgba(34, 211, 238, 0.12);
-  transform: translateY(-4px);
+/* ============================================================
+   HEADINGS + GRADIENT TEXT
+   ============================================================ */
+.h-grad {
+  background: linear-gradient(120deg, #3b82f6, #60a5fa 60%, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Card with animated gradient border */
-.holo-card {
-  position: relative;
-  background: rgba(11, 16, 32, 0.6);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: linear-gradient(180deg, rgba(13, 21, 38, 0.9), rgba(10, 16, 32, 0.9));
+  border: 1px solid rgba(47, 107, 255, 0.12);
   border-radius: 1rem;
   transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
-.holo-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(34, 211, 238, 0.5),
-    rgba(59, 130, 246, 0.15),
-    rgba(139, 92, 246, 0.4),
-    rgba(0, 255, 156, 0.2)
-  );
-  background-size: 300% 300%;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: borderFlow 6s ease infinite;
-  opacity: 0.5;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
+.card:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 18px 50px rgba(3, 8, 24, 0.7), 0 0 0 1px rgba(59, 130, 246, 0.12);
+  transform: translateY(-4px);
 }
 
-.holo-card:hover::before {
-  opacity: 1;
+.card-flat {
+  background: linear-gradient(180deg, rgba(13, 21, 38, 0.75), rgba(10, 16, 32, 0.75));
+  border: 1px solid rgba(47, 107, 255, 0.1);
+  border-radius: 1rem;
 }
 
-.holo-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 50px rgba(3, 8, 24, 0.7);
-}
-
-/* HUD corner brackets */
-.hud-frame {
-  position: relative;
-}
-
-.hud-frame::before,
-.hud-frame::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-color: rgba(34, 211, 238, 0.6);
-  pointer-events: none;
-}
-
-.hud-frame::before {
-  top: -1px;
-  left: -1px;
-  border-top: 2px solid;
-  border-left: 2px solid;
-}
-
-.hud-frame::after {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-}
-
-/* ============================================================
-   TEXT / GLOW / GRADIENT UTILITIES
-   ============================================================ */
-
-.text-glow {
-  text-shadow: 0 0 12px rgba(0, 255, 156, 0.5), 0 0 30px rgba(0, 255, 156, 0.25);
-}
-
-.text-glow-cyan {
-  text-shadow: 0 0 12px rgba(34, 211, 238, 0.6), 0 0 30px rgba(34, 211, 238, 0.3);
-}
-
-.grad-text {
-  background: linear-gradient(120deg, #22d3ee, #3b82f6, #8b5cf6, #00ff9c);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 8s ease infinite;
-}
-
-.grad-text-teal {
-  background: linear-gradient(120deg, #2dd4bf, #22d3ee, #38bdf8);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Icon tile — rounded square with blue glow */
+.icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  background: linear-gradient(135deg, rgba(47, 107, 255, 0.18), rgba(56, 189, 248, 0.08));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
 }
 
 /* ============================================================
    BUTTONS
    ============================================================ */
-
-.btn-primary {
-  position: relative;
+.btn-blue {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.55rem;
+  padding: 0.8rem 1.6rem;
   min-height: 48px;
-  border-radius: 0.6rem;
-  font-family: "Fira Code", monospace;
-  font-size: 0.875rem;
+  border-radius: 0.7rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: #050810;
-  background: linear-gradient(120deg, #22d3ee, #00ff9c);
-  background-size: 200% 200%;
+  color: #fff;
+  background: linear-gradient(120deg, #2563eb, #3b82f6);
   border: none;
-  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
   transition: all 0.3s ease;
-  animation: gradientShift 5s ease infinite;
 }
-
-.btn-primary:hover {
-  box-shadow: 0 0 30px rgba(34, 211, 238, 0.5);
+.btn-blue:hover {
+  box-shadow: 0 10px 34px rgba(47, 107, 255, 0.55);
   transform: translateY(-2px);
 }
 
-.btn-ghost {
+.btn-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.55rem;
+  padding: 0.8rem 1.6rem;
   min-height: 48px;
-  border-radius: 0.6rem;
-  font-family: "Fira Code", monospace;
-  font-size: 0.875rem;
+  border-radius: 0.7rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: #22d3ee;
-  background: rgba(34, 211, 238, 0.06);
-  border: 1px solid rgba(34, 211, 238, 0.3);
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(148, 163, 184, 0.25);
   transition: all 0.3s ease;
 }
-
-.btn-ghost:hover {
-  background: rgba(34, 211, 238, 0.14);
-  border-color: rgba(34, 211, 238, 0.6);
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+.btn-outline:hover {
+  border-color: rgba(59, 130, 246, 0.6);
+  color: #fff;
+  background: rgba(47, 107, 255, 0.08);
   transform: translateY(-2px);
 }
 
 /* ============================================================
-   TAGS / BADGES / MISC
+   PILL / TAG / CHIP
    ============================================================ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.7rem;
+  font-family: "Fira Code", monospace;
+  font-size: 0.7rem;
+  border-radius: 0.4rem;
+  color: #93c5fd;
+  background: rgba(47, 107, 255, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  transition: all 0.2s;
+}
+.chip:hover {
+  background: rgba(47, 107, 255, 0.16);
+  border-color: rgba(59, 130, 246, 0.5);
+}
 
-.cyber-tag {
-  @apply px-3 py-1 text-xs font-mono rounded-md border;
-  border-color: rgba(34, 211, 238, 0.25);
-  background: rgba(34, 211, 238, 0.06);
-  color: #7dd3fc;
+.filter-tab {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: 0.55rem;
+  color: #94a3b8;
+  border: 1px solid rgba(47, 107, 255, 0.12);
+  background: rgba(13, 21, 38, 0.6);
   transition: all 0.25s;
+  cursor: pointer;
+}
+.filter-tab:hover {
+  color: #dbeafe;
+  border-color: rgba(59, 130, 246, 0.4);
+}
+.filter-tab.active {
+  color: #fff;
+  background: linear-gradient(120deg, #2563eb, #3b82f6);
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
 }
 
-.cyber-tag:hover {
-  background: rgba(34, 211, 238, 0.16);
-  border-color: rgba(34, 211, 238, 0.6);
-  color: #22d3ee;
-  transform: translateY(-2px);
+/* Tool tile */
+.tool-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
+  border-radius: 0.8rem;
+  background: rgba(13, 21, 38, 0.7);
+  border: 1px solid rgba(47, 107, 255, 0.1);
+  transition: all 0.3s;
+  min-height: 88px;
+}
+.tool-tile:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(3, 8, 24, 0.6);
 }
 
+/* ============================================================
+   DIVIDERS + MISC
+   ============================================================ */
 .section-divider {
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(34, 211, 238, 0.35),
-    rgba(139, 92, 246, 0.25),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(47, 107, 255, 0.25), transparent);
 }
 
-/* Timeline line — gradient */
 .timeline-line::before {
   content: "";
   position: absolute;
@@ -319,41 +257,41 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, #22d3ee, #8b5cf6, transparent);
+  background: linear-gradient(to bottom, #2f6bff, rgba(47, 107, 255, 0.1));
 }
 
-.typing-cursor::after {
-  content: "▌";
-  animation: blink 1s step-end infinite;
-  color: var(--cyan);
+/* progress bar fill */
+.bar-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  overflow: hidden;
 }
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ============================================================
    SCROLL REVEAL
    ============================================================ */
-
 .reveal {
   opacity: 0;
-  transform: translateY(36px);
+  transform: translateY(34px);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
-
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* ============================================================
-   RESPONSIVE & ACCESSIBILITY
+   ACCESSIBILITY
    ============================================================ */
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -362,9 +300,6 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  .scan-overlay::before {
-    display: none;
   }
   .reveal {
     opacity: 1;
@@ -382,15 +317,6 @@ body.nav-open {
   min-width: 44px;
   display: flex;
   align-items: center;
-}
-
-html {
-  font-size: clamp(14px, 1vw + 10px, 18px);
-}
-
-.no-overflow {
-  overflow-x: hidden;
-  word-break: break-word;
 }
 
 .section-px {

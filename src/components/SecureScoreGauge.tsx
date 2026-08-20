@@ -75,9 +75,9 @@ export default function SecureScoreGauge() {
         >
           <defs>
             <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#ff3b6b" />
-              <stop offset="50%" stopColor="#ffb300" />
-              <stop offset="100%" stopColor="#00ff9c" />
+              <stop offset="0%" stopColor="#1e40af" />
+              <stop offset="50%" stopColor="#2f6bff" />
+              <stop offset="100%" stopColor="#60a5fa" />
             </linearGradient>
           </defs>
 
@@ -99,13 +99,13 @@ export default function SecureScoreGauge() {
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={dashOffset}
-            style={{ filter: "drop-shadow(0 0 6px rgba(0,255,156,0.4))" }}
+            style={{ filter: "drop-shadow(0 0 6px rgba(47,107,255,0.5))" }}
           />
         </svg>
 
         {/* Center readout */}
         <div className="absolute inset-0 flex flex-col items-center justify-end pb-1">
-          <span className="font-display text-4xl font-bold grad-text-teal">
+          <span className="font-display text-4xl font-extrabold h-grad">
             {current}%
           </span>
           <span className="text-[0.65rem] font-mono text-slate-500 uppercase tracking-wider">
@@ -115,10 +115,10 @@ export default function SecureScoreGauge() {
       </div>
 
       <div className="flex items-center gap-2 mt-2 font-mono text-xs">
-        <span className="text-terminal-red/80">from 35%</span>
-        <span className="text-slate-500">→</span>
-        <span className="text-terminal-green">80%</span>
-        <span className="ml-1 px-2 py-0.5 rounded bg-terminal-green/10 border border-terminal-green/30 text-terminal-green">
+        <span className="text-slate-500">from 35%</span>
+        <span className="text-slate-600">→</span>
+        <span className="text-brand-light">80%</span>
+        <span className="ml-1 px-2 py-0.5 rounded bg-brand-blue/10 border border-brand-blue/30 text-brand-light">
           +45 pts
         </span>
       </div>

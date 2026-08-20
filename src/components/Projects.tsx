@@ -1,127 +1,155 @@
 "use client";
 
+import { useState } from "react";
 import SectionHeader from "./SectionHeader";
 import Reveal from "./Reveal";
 
 interface Project {
   title: string;
-  headline: string;
-  description: string;
+  category: string;
   icon: string;
   metric: string;
-  accent: string;
+  featured?: boolean;
+  description: string;
   tags: string[];
 }
 
 const projects: Project[] = [
   {
     title: "Hybrid AD → Entra ID Migration",
-    headline: "Migrated endpoints off on-premises Active Directory",
-    description:
-      "Reduced reliance on on-prem infrastructure across 6 affiliated companies by migrating corporate endpoints from AD domain join to Microsoft Entra ID — rebuilding laptops as Entra-joined devices and resolving post-migration duplicate-profile and authentication issues.",
+    category: "Cloud Migration",
     icon: "🔄",
     metric: "6 companies",
-    accent: "text-terminal-cyan",
-    tags: ["Entra ID", "Intune", "Autopilot"],
+    featured: true,
+    description:
+      "Migrated corporate endpoints from on-prem Active Directory domain join to Microsoft Entra ID across 6 affiliated companies — rebuilding laptops as Entra-joined devices and resolving duplicate-profile and authentication issues.",
+    tags: ["Entra ID", "Intune", "Autopilot", "Hybrid Identity"],
   },
   {
     title: "Conditional Access & Zero Trust",
-    headline: "Enforced Zero Trust access for 600+ identities",
-    description:
-      "Designed and implemented an Entra Conditional Access architecture enforcing MFA, named/trusted locations, sign-in frequency, persistent-session controls, and VDI bypass groups — restricting access to sanctioned conditions and hardening identity security organization-wide.",
+    category: "Identity Security",
     icon: "🛡️",
     metric: "600+ users",
-    accent: "text-terminal-green",
-    tags: ["Conditional Access", "MFA", "FIDO2"],
+    featured: true,
+    description:
+      "Designed an Entra Conditional Access architecture enforcing MFA, named/trusted locations, sign-in frequency, persistent-session controls, and VDI bypass groups — hardening identity security organization-wide.",
+    tags: ["Conditional Access", "MFA", "FIDO2", "RBAC"],
   },
   {
     title: "Microsoft 365 Administration",
-    headline: "Sustained M365 operations for 250 users",
-    description:
-      "Administered Exchange Online, Teams, SharePoint, and OneDrive across multiple business units — managing shared mailboxes, mail flow, licensing, and identity lifecycle across 6 companies.",
+    category: "Cloud Administration",
     icon: "☁️",
     metric: "250 users",
-    accent: "text-cloud-sky",
-    tags: ["Exchange", "Teams", "SharePoint"],
+    description:
+      "Administered Exchange Online, Teams, SharePoint, and OneDrive across multiple business units — managing shared mailboxes, mail flow, licensing, and identity lifecycle across 6 companies.",
+    tags: ["Exchange", "Teams", "SharePoint", "Licensing"],
   },
   {
-    title: "Cybersecurity Ops & IR",
-    headline: "Contained 200+ phishing & fraud incidents",
-    description:
-      "Investigated and contained over 200 phishing, spoofing, and payroll-fraud incidents using Microsoft Defender, Exchange Online message tracing, email-header analysis, and audit-log review — strengthening endpoint security and response.",
+    title: "Cybersecurity Ops & Incident Response",
+    category: "Security Operations",
     icon: "🔍",
     metric: "200+ incidents",
-    accent: "text-terminal-amber",
-    tags: ["Defender", "Message Trace", "Audit Logs"],
+    description:
+      "Investigated and contained over 200 phishing, spoofing, and payroll-fraud incidents using Microsoft Defender, Exchange Online message tracing, email-header analysis, and audit-log review.",
+    tags: ["Defender", "Message Trace", "Audit Logs", "IR"],
   },
   {
     title: "Endpoint Signature Automation",
-    headline: "Standardized Outlook signatures org-wide",
-    description:
-      "Built a PowerShell + Microsoft Graph solution deployed through Intune to standardize Outlook email signatures organization-wide, and provisioned/managed virtual desktops (VDI), Azure resources, VPN, and modern print services.",
+    category: "Automation",
     icon: "⚡",
     metric: "PowerShell + Graph",
-    accent: "text-cloud-violet",
-    tags: ["PowerShell", "Graph API", "Intune"],
+    description:
+      "Built a PowerShell + Microsoft Graph solution deployed through Intune to standardize Outlook email signatures org-wide, and provisioned VDI, Azure resources, VPN, and modern print services.",
+    tags: ["PowerShell", "Graph API", "Intune", "VDI"],
   },
   {
     title: "Secure Score Hardening",
-    headline: "Raised tenant Secure Score 35% → 80%",
-    description:
-      "Improved tenant security posture by a 45-point gain, remediating identity, device, and data recommendations across the Microsoft 365 environment and enforcing security baselines.",
+    category: "Security Operations",
     icon: "📈",
     metric: "+45 points",
-    accent: "text-terminal-green",
+    description:
+      "Raised the tenant Microsoft Secure Score from 35% to 80% by remediating identity, device, and data recommendations and enforcing security baselines across the M365 environment.",
     tags: ["Secure Score", "Baselines", "Compliance"],
   },
 ];
 
+const filters = [
+  "All Projects",
+  "Identity Security",
+  "Cloud Migration",
+  "Security Operations",
+  "Cloud Administration",
+  "Automation",
+];
+
 export default function Projects() {
+  const [active, setActive] = useState("All Projects");
+
+  const visible =
+    active === "All Projects"
+      ? projects
+      : projects.filter((p) => p.category === active);
+
   return (
     <section id="projects" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          command="ls ~/projects --highlight"
-          title="Key Projects"
-          subtitle="High-impact initiatives in cloud migration, identity security, and automation"
+          label="My Projects"
+          title="Projects That"
+          highlight="Build Secure Futures."
+          subtitle="A collection of cloud and security initiatives designed to solve real-world problems and strengthen security at every layer."
         />
 
+        {/* Filter tabs */}
+        <Reveal className="flex flex-wrap gap-2 sm:gap-3 justify-center mb-10">
+          {filters.map((f) => (
+            <button
+              key={f}
+              onClick={() => setActive(f)}
+              className={`filter-tab ${active === f ? "active" : ""}`}
+            >
+              {f}
+            </button>
+          ))}
+        </Reveal>
+
+        {/* Project grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
-          {projects.map((project, i) => (
-            <Reveal key={project.title} delay={(i % 3) * 90}>
-              <div className="holo-card h-full p-6 group flex flex-col">
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <span className="text-3xl group-hover:scale-110 transition-transform">
-                    {project.icon}
-                  </span>
-                  <span
-                    className={`font-mono text-xs px-2.5 py-1 rounded-md border border-slate-700/50 bg-slate-800/50 ${project.accent}`}
-                  >
-                    {project.metric}
-                  </span>
+          {visible.map((project, i) => (
+            <Reveal key={project.title} delay={(i % 3) * 80}>
+              <div className="card h-full p-6 flex flex-col">
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <span className="icon-tile w-12 h-12 text-2xl">{project.icon}</span>
+                  {project.featured && (
+                    <span className="text-[0.6rem] font-semibold px-2 py-1 rounded-md bg-emerald-500/12 border border-emerald-500/30 text-emerald-300">
+                      FEATURED
+                    </span>
+                  )}
                 </div>
 
-                <h3
-                  className={`font-display text-sm font-semibold mb-1.5 leading-snug ${project.accent}`}
-                >
+                <p className="text-brand-light text-xs font-mono mb-1">
+                  {project.category}
+                </p>
+                <h3 className="font-display font-semibold text-white text-base mb-2 leading-snug">
                   {project.title}
                 </h3>
-                <p className="text-slate-200 text-sm font-semibold mb-2 leading-snug">
-                  {project.headline}
-                </p>
                 <p className="text-slate-400 text-xs sm:text-sm leading-relaxed flex-1">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-slate-700/40">
+                <div className="flex flex-wrap gap-1.5 mt-4">
                   {project.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="font-mono text-[0.65rem] px-2 py-0.5 rounded bg-slate-800/60 text-slate-400 border border-slate-700/50"
-                    >
-                      {t}
-                    </span>
+                    <span key={t} className="chip">{t}</span>
                   ))}
+                </div>
+
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-brand-blue/10">
+                  <span className="text-xs font-semibold text-brand-light">
+                    {project.metric}
+                  </span>
+                  <span className="text-[0.7rem] font-mono text-slate-500">
+                    Microsoft Stack
+                  </span>
                 </div>
               </div>
             </Reveal>

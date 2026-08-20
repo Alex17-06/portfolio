@@ -3,15 +3,41 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const navLinks = [
-  { href: "#home", label: "~/home" },
-  { href: "#about", label: "~/about" },
-  { href: "#projects", label: "~/projects" },
-  { href: "#skills", label: "~/skills" },
-  { href: "#experience", label: "~/experience" },
-  { href: "#certifications", label: "~/certs" },
-  { href: "#education", label: "~/edu" },
-  { href: "#contact", label: "~/contact" },
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#certifications", label: "Certifications" },
 ];
+
+function ShieldLogo() {
+  return (
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="navShield" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#60a5fa" />
+          <stop offset="1" stopColor="#2f6bff" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M17 3 L29 8 V17 C29 24 24 28.5 17 31 C10 28.5 5 24 5 17 V8 Z"
+        fill="url(#navShield)"
+        fillOpacity="0.18"
+        stroke="url(#navShield)"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M12 17 L15.5 20.5 L22 13.5"
+        fill="none"
+        stroke="url(#navShield)"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,11 +49,11 @@ export default function Navbar() {
     if (ticking.current) return;
     ticking.current = true;
     requestAnimationFrame(() => {
-      setScrolled(window.scrollY > 50);
-      const sections = navLinks.map((l) => l.href.replace("#", ""));
+      setScrolled(window.scrollY > 40);
+      const sections = [...navLinks.map((l) => l.href.replace("#", "")), "contact"];
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
-        if (el && el.getBoundingClientRect().top <= 120) {
+        if (el && el.getBoundingClientRect().top <= 130) {
           setActiveSection(sections[i]);
           break;
         }
@@ -36,13 +62,8 @@ export default function Navbar() {
     });
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.classList.add("nav-open");
-    } else {
-      document.body.classList.remove("nav-open");
-    }
+    document.body.classList.toggle("nav-open", mobileOpen);
     return () => document.body.classList.remove("nav-open");
   }, [mobileOpen]);
 
@@ -51,7 +72,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Close on Escape key
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobileOpen(false);
@@ -60,10 +80,9 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Close menu if screen resizes to desktop width
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth >= 768) setMobileOpen(false);
+      if (window.innerWidth >= 1024) setMobileOpen(false);
     };
     window.addEventListener("resize", onResize, { passive: true });
     return () => window.removeEventListener("resize", onResize);
@@ -74,95 +93,107 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-terminal-bg/80 backdrop-blur-xl border-b border-terminal-cyan/15 shadow-lg shadow-black/40"
+            ? "bg-ink-950/85 backdrop-blur-xl border-b border-brand-blue/12 shadow-lg shadow-black/40"
             : "bg-transparent"
         }`}
         role="navigation"
         aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-[68px]">
             {/* Logo */}
-            <a
-              href="#home"
-              className="font-display font-bold text-base sm:text-lg transition-all min-h-[44px] flex items-center"
-            >
-              <span className="text-terminal-cyan">&gt;</span>&nbsp;
-              <span className="grad-text">alex_philip</span>
-              <span className="animate-cursor-blink text-terminal-cyan">_</span>
+            <a href="#home" className="flex items-center gap-2.5 min-h-[44px]">
+              <ShieldLogo />
+              <span className="flex flex-col leading-none">
+                <span className="font-display font-bold text-white text-base sm:text-lg">
+                  Alex Philip
+                </span>
+                <span className="font-mono text-[0.6rem] tracking-[0.18em] text-brand-light/70 uppercase mt-0.5">
+                  Cloud &amp; Security
+                </span>
+              </span>
             </a>
 
-            {/* Desktop nav — hidden on mobile/tablet */}
-            <div className="hidden md:flex items-center gap-1">
+            {/* Desktop nav */}
+            <div className="hidden lg:flex items-center gap-0.5">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-2 text-sm font-mono rounded-md transition-all min-h-[44px] flex items-center ${
+                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-all min-h-[40px] flex items-center ${
                     activeSection === link.href.replace("#", "")
-                      ? "text-terminal-cyan bg-terminal-cyan/10 shadow-glow-cyan"
-                      : "text-slate-400 hover:text-terminal-cyan hover:bg-terminal-cyan/5"
+                      ? "text-brand-light"
+                      : "text-slate-400 hover:text-white"
                   }`}
                 >
                   {link.label}
                 </a>
               ))}
-              <a
-                href="/Alex_Philip_Resume.pdf"
-                download
-                className="ml-2 px-3 py-1.5 text-sm font-mono rounded-md flex items-center gap-1.5 text-terminal-bg bg-gradient-to-r from-terminal-cyan to-terminal-green hover:shadow-glow-cyan transition-all font-semibold"
-              >
-                ↓ resume
+              <a href="#contact" className="btn-blue ml-3 !min-h-[42px] !py-2 !px-4 text-sm">
+                Contact Me
+                <span aria-hidden="true">→</span>
               </a>
             </div>
 
-            {/* Mobile hamburger button — 44×44 touch target */}
+            {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden text-terminal-cyan font-mono text-xl min-h-[44px] min-w-[44px] flex items-center justify-center rounded hover:bg-terminal-cyan/10 transition-all"
+              className="lg:hidden text-brand-light min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg hover:bg-brand-blue/10 transition-all"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
             >
-              {mobileOpen ? "[×]" : "[≡]"}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                {mobileOpen ? (
+                  <path d="M18 6 6 18M6 6l12 12" strokeLinecap="round" />
+                ) : (
+                  <path d="M3 12h18M3 6h18M3 18h18" strokeLinecap="round" />
+                )}
+              </svg>
             </button>
           </div>
         </div>
 
-        {/* Mobile dropdown menu */}
+        {/* Mobile menu */}
         {mobileOpen && (
           <div
             id="mobile-menu"
-            className="md:hidden bg-terminal-bg/95 backdrop-blur-xl border-b border-terminal-cyan/15"
+            className="lg:hidden bg-ink-950/95 backdrop-blur-xl border-b border-brand-blue/12"
           >
-            <div className="px-4 py-2 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <div className="px-4 py-3 space-y-1 max-h-[calc(100vh-4.25rem)] overflow-y-auto">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center px-3 min-h-[44px] text-sm font-mono text-slate-400 hover:text-terminal-cyan hover:bg-terminal-cyan/5 rounded transition-all"
+                  className="flex items-center px-3 min-h-[46px] text-sm font-medium text-slate-300 hover:text-white hover:bg-brand-blue/8 rounded-lg transition-all"
                 >
                   {link.label}
                 </a>
               ))}
               <a
+                href="#contact"
+                onClick={() => setMobileOpen(false)}
+                className="btn-blue w-full mt-2"
+              >
+                Contact Me →
+              </a>
+              <a
                 href="/Alex_Philip_Resume.pdf"
                 download
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2 px-3 min-h-[44px] text-sm font-mono text-terminal-cyan hover:bg-terminal-cyan/10 rounded transition-all font-semibold"
+                className="btn-outline w-full mt-2"
               >
-                ↓ download_resume
+                ↓ Download Resume
               </a>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Backdrop overlay — tap outside to close menu on mobile */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/40 md:hidden"
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
           aria-hidden="true"
           onClick={() => setMobileOpen(false)}
         />

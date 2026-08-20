@@ -19,20 +19,21 @@ export default function OpengraphImage() {
           justifyContent: "center",
           padding: "80px",
           background:
-            "radial-gradient(ellipse 80% 60% at 20% 0%, rgba(59,130,246,0.25), transparent 60%), radial-gradient(ellipse 70% 60% at 90% 100%, rgba(139,92,246,0.22), transparent 55%), #050810",
-          fontFamily: "monospace",
+            "radial-gradient(ellipse 80% 60% at 78% 8%, rgba(47,107,255,0.3), transparent 58%), radial-gradient(ellipse 70% 60% at 10% 100%, rgba(56,189,248,0.18), transparent 55%), #05070f",
+          fontFamily: "sans-serif",
         }}
       >
-        {/* Terminal prompt */}
+        {/* Label */}
         <div
           style={{
             display: "flex",
-            fontSize: 28,
-            color: "#22d3ee",
+            fontSize: 26,
+            letterSpacing: 4,
+            color: "#4f8bff",
             marginBottom: 24,
           }}
         >
-          alex@m365-admin:~$ whoami
+          MICROSOFT 365 &amp; CLOUD SECURITY
         </div>
 
         {/* Name */}
@@ -41,7 +42,7 @@ export default function OpengraphImage() {
             display: "flex",
             fontSize: 96,
             fontWeight: 800,
-            background: "linear-gradient(120deg, #22d3ee, #3b82f6, #00ff9c)",
+            background: "linear-gradient(120deg, #3b82f6, #60a5fa, #38bdf8)",
             backgroundClip: "text",
             color: "transparent",
             lineHeight: 1.05,
@@ -76,11 +77,11 @@ export default function OpengraphImage() {
               style={{
                 display: "flex",
                 fontSize: 24,
-                color: "#7dd3fc",
+                color: "#93c5fd",
                 padding: "12px 24px",
-                border: "1px solid rgba(34,211,238,0.35)",
+                border: "1px solid rgba(59,130,246,0.4)",
                 borderRadius: 12,
-                background: "rgba(34,211,238,0.08)",
+                background: "rgba(47,107,255,0.1)",
               }}
             >
               {t}
@@ -97,7 +98,7 @@ export default function OpengraphImage() {
             left: 0,
             width: "100%",
             height: 10,
-            background: "linear-gradient(90deg, #22d3ee, #3b82f6, #8b5cf6, #00ff9c)",
+            background: "linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa, #38bdf8)",
           }}
         />
       </div>

@@ -4,78 +4,111 @@ import { useEffect, useRef, useState } from "react";
 import SectionHeader from "./SectionHeader";
 import Reveal from "./Reveal";
 
-interface SkillCategory {
-  category: string;
+interface Category {
   icon: string;
-  accent: string;
-  bar: string;
-  items: { name: string; level: number }[];
+  title: string;
+  items: string[];
+  level: number;
+  tier: string;
 }
 
-const skills: SkillCategory[] = [
+const categories: Category[] = [
   {
-    category: "Identity & Access",
     icon: "🔐",
-    accent: "text-terminal-green",
-    bar: "linear-gradient(90deg, #00cc7a, #00ff9c)",
+    title: "Identity & Access",
     items: [
-      { name: "Microsoft Entra ID (Azure AD)", level: 92 },
-      { name: "Conditional Access / Zero Trust", level: 90 },
-      { name: "MFA / FIDO2 / RBAC", level: 90 },
-      { name: "Hybrid Identity & AD", level: 88 },
-      { name: "Okta", level: 75 },
+      "Microsoft Entra ID (Azure AD)",
+      "Conditional Access / Zero Trust",
+      "MFA · FIDO2 · RBAC",
+      "Hybrid Identity & Active Directory",
     ],
+    level: 92,
+    tier: "Expert",
   },
   {
-    category: "Microsoft 365",
     icon: "☁️",
-    accent: "text-terminal-cyan",
-    bar: "linear-gradient(90deg, #22d3ee, #38bdf8)",
+    title: "Microsoft 365",
     items: [
-      { name: "Exchange Online", level: 92 },
-      { name: "Teams (incl. Teams Phone)", level: 88 },
-      { name: "SharePoint / OneDrive", level: 88 },
-      { name: "Licensing & Mail Flow", level: 85 },
-      { name: "Intune / MDM / BYOD", level: 88 },
+      "Exchange Online & Mail Flow",
+      "Teams (incl. Teams Phone)",
+      "SharePoint & OneDrive",
+      "Licensing & Identity Lifecycle",
     ],
+    level: 89,
+    tier: "Advanced",
   },
   {
-    category: "Security",
     icon: "🛡️",
-    accent: "text-cloud-violet",
-    bar: "linear-gradient(90deg, #8b5cf6, #6366f1)",
+    title: "Security Operations",
     items: [
-      { name: "Microsoft Defender", level: 90 },
-      { name: "Incident Response", level: 85 },
-      { name: "Threat Investigation", level: 85 },
-      { name: "Endpoint Hardening", level: 85 },
-      { name: "Security Baselines", level: 82 },
+      "Microsoft Defender for Endpoint",
+      "Threat Investigation & IR",
+      "Endpoint Hardening",
+      "Security Baselines",
     ],
+    level: 87,
+    tier: "Advanced",
   },
   {
-    category: "Cloud & Infrastructure",
     icon: "🌐",
-    accent: "text-cloud-sky",
-    bar: "linear-gradient(90deg, #3b82f6, #2dd4bf)",
+    title: "Cloud & Infrastructure",
     items: [
-      { name: "Azure (VMs, Networking, VPN)", level: 85 },
-      { name: "Windows Server 2016–2025", level: 85 },
-      { name: "DNS / DHCP / TCP/IP", level: 85 },
-      { name: "Firewalls / LAN / WAN", level: 82 },
-      { name: "Universal Print / Azure Print", level: 80 },
+      "Azure (VMs, Networking, VPN)",
+      "Windows Server 2016–2025",
+      "DNS · DHCP · TCP/IP · Firewalls",
+      "Universal / Azure Print",
     ],
+    level: 84,
+    tier: "Advanced",
+  },
+  {
+    icon: "⚡",
+    title: "Automation & Scripting",
+    items: [
+      "PowerShell",
+      "Microsoft Graph API",
+      "JSON Reporting",
+      "Workflow Automation",
+    ],
+    level: 82,
+    tier: "Proficient",
+  },
+  {
+    icon: "🔧",
+    title: "Device & Endpoint Mgmt",
+    items: [
+      "Microsoft Intune / MDM",
+      "Atera RMM",
+      "Compliance & Config Profiles",
+      "Imaging · BYOD · Autopilot",
+    ],
+    level: 88,
+    tier: "Advanced",
   },
 ];
 
-function SkillBar({
-  name,
-  level,
-  bar,
-}: {
-  name: string;
-  level: number;
-  bar: string;
-}) {
+const tools = [
+  { name: "Microsoft 365", icon: "☁️" },
+  { name: "Azure", icon: "🔷" },
+  { name: "Entra ID", icon: "🔐" },
+  { name: "Intune", icon: "📱" },
+  { name: "Defender", icon: "🛡️" },
+  { name: "Exchange", icon: "📧" },
+  { name: "PowerShell", icon: "⚡" },
+  { name: "ServiceNow", icon: "🎫" },
+  { name: "Atera", icon: "🖥️" },
+  { name: "Windows Server", icon: "🪟" },
+];
+
+const approach = [
+  { icon: "🔍", title: "Assess", desc: "Identify risks and understand the environment." },
+  { icon: "📐", title: "Design", desc: "Architect secure solutions with best practices." },
+  { icon: "⚙️", title: "Implement", desc: "Build and integrate security into every layer." },
+  { icon: "📊", title: "Monitor", desc: "Continuously monitor, detect, and respond." },
+  { icon: "📈", title: "Improve", desc: "Review, learn, and enhance security continuously." },
+];
+
+function CategoryCard({ cat, delay }: { cat: Category; delay: number }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [w, setW] = useState(0);
 
@@ -86,38 +119,43 @@ function SkillBar({
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            setW(level);
+            setW(cat.level);
             observer.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [level]);
+  }, [cat.level]);
 
   return (
-    <div className="mb-3.5" ref={ref}>
-      <div className="flex justify-between items-center mb-1.5 gap-2">
-        <span className="text-xs sm:text-sm text-slate-300 font-mono truncate">
-          {name}
-        </span>
-        <span className="text-xs text-slate-500 font-mono shrink-0">
-          {level}%
-        </span>
+    <Reveal delay={delay}>
+      <div ref={ref} className="card h-full p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="icon-tile w-10 h-10 text-lg">{cat.icon}</span>
+          <h3 className="font-display font-semibold text-white text-base">
+            {cat.title}
+          </h3>
+        </div>
+        <ul className="space-y-2 mb-5">
+          {cat.items.map((it) => (
+            <li key={it} className="flex items-start gap-2 text-xs sm:text-sm text-slate-400">
+              <span className="text-brand-light mt-1.5 w-1 h-1 rounded-full bg-brand-light shrink-0" />
+              {it}
+            </li>
+          ))}
+        </ul>
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-xs font-medium text-brand-light">{cat.tier}</span>
+          <span className="text-xs font-mono text-slate-500">{cat.level}%</span>
+        </div>
+        <div className="bar-track">
+          <div className="bar-fill" style={{ width: `${w}%` }} />
+        </div>
       </div>
-      <div className="h-2 bg-slate-800/60 rounded-full overflow-hidden border border-slate-700/40">
-        <div
-          className="h-full rounded-full transition-[width] duration-[1400ms] ease-out"
-          style={{
-            width: `${w}%`,
-            background: bar,
-            boxShadow: "0 0 10px rgba(34, 211, 238, 0.4)",
-          }}
-        />
-      </div>
-    </div>
+    </Reveal>
   );
 }
 
@@ -126,52 +164,60 @@ export default function Skills() {
     <section id="skills" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          command="sudo apt list --installed"
-          title="Technical Skills"
-          subtitle="Core competencies across identity, M365, security, and cloud infrastructure"
+          label="Technical Skills"
+          title="Skills That"
+          highlight="Strengthen Security."
+          subtitle="A comprehensive toolkit of technologies, frameworks, and methodologies I use to build secure, resilient cloud environments."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-5 lg:gap-6">
-          {skills.map((cat, i) => (
-            <Reveal key={cat.category} delay={(i % 2) * 100}>
-              <div className="holo-card h-full p-5 sm:p-6">
-                <h3
-                  className={`font-display font-semibold mb-5 flex items-center gap-2 text-sm sm:text-base ${cat.accent}`}
-                >
-                  <span className="text-lg">{cat.icon}</span>
-                  {cat.category}
-                </h3>
-                {cat.items.map((skill) => (
-                  <SkillBar
-                    key={skill.name}
-                    name={skill.name}
-                    level={skill.level}
-                    bar={cat.bar}
-                  />
-                ))}
-              </div>
-            </Reveal>
+        {/* Category cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
+          {categories.map((cat, i) => (
+            <CategoryCard key={cat.title} cat={cat} delay={(i % 3) * 80} />
           ))}
         </div>
 
-        {/* Tag cloud */}
-        <Reveal className="mt-12 text-center">
-          <p className="font-mono text-sm text-slate-500 mb-4">
-            <span className="text-terminal-cyan">$</span> grep -r
-            &quot;additional_skills&quot;
+        {/* Tools & Technologies */}
+        <Reveal className="mt-14">
+          <p className="label mb-6 justify-center text-center w-full">
+            Tools &amp; Technologies
           </p>
-          <div className="flex flex-wrap justify-center gap-2 max-w-3xl 2xl:max-w-5xl mx-auto">
-            {[
-              "PowerShell", "Microsoft Graph", "JSON Reporting",
-              "ServiceNow", "Salesforce", "Atera RMM", "ITIL Practices",
-              "Windows 7/10/11", "macOS", "Linux", "iOS / Android",
-              "Dell Hardware", "Imaging & Deployment", "VDI",
-              "Crestron", "AV Systems",
-            ].map((tag) => (
-              <span key={tag} className="cyber-tag text-xs sm:text-sm">
-                {tag}
-              </span>
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
+            {tools.map((t) => (
+              <div key={t.name} className="tool-tile">
+                <span className="text-2xl">{t.icon}</span>
+                <span className="text-[0.7rem] text-slate-400 text-center font-medium">
+                  {t.name}
+                </span>
+              </div>
             ))}
+          </div>
+        </Reveal>
+
+        {/* My Approach */}
+        <Reveal className="mt-14">
+          <div className="card p-6 sm:p-8">
+            <h3 className="font-display text-lg font-bold text-white mb-6">
+              Security is a <span className="h-grad">mindset</span>, not a product.
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              {approach.map((a, i) => (
+                <div key={a.title} className="relative flex flex-col items-center text-center px-2">
+                  <span className="icon-tile w-11 h-11 text-lg mb-3">{a.icon}</span>
+                  <h4 className="font-display font-semibold text-white text-sm mb-1">
+                    {a.title}
+                  </h4>
+                  <p className="text-[0.72rem] text-slate-500 leading-relaxed">
+                    {a.desc}
+                  </p>
+                  {i < approach.length - 1 && (
+                    <span className="hidden lg:block absolute -right-2 top-5 text-brand-light/40">
+                      →
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
       </div>
