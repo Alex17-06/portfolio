@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import BackgroundFX from "@/components/BackgroundFX";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.alexphilip.ca"),
@@ -67,6 +68,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         <div className="sbd-bg" aria-hidden="true" />
         <div className="sbd-bg dot-grid" aria-hidden="true" style={{ opacity: 0.4 }} />
+        <BackgroundFX />
         <div className="relative z-10">{children}</div>
       </body>
     </html>
