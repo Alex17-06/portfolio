@@ -346,9 +346,6 @@ body {
 .marquee-track {
   animation: marquee 34s linear infinite;
 }
-.marquee-mask:hover .marquee-track {
-  animation-play-state: paused;
-}
 /* Fade both edges so logos scroll in/out smoothly */
 .marquee-mask {
   -webkit-mask-image: linear-gradient(
