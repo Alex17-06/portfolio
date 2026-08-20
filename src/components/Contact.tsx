@@ -12,7 +12,7 @@ const badges = [
 
 const info = [
   { icon: "📧", label: "Email", value: "alexphilip2121@gmail.com", href: "mailto:alexphilip2121@gmail.com", note: "Best way to reach me" },
-  { icon: "📱", label: "Phone", value: "(437) 425-2630", href: "tel:+14374252630", note: "Mon–Fri, 9AM–6PM EST" },
+  { icon: "💼", label: "LinkedIn", value: "in/alex-philip", href: "https://www.linkedin.com/in/alex-philip-b9aa1a270", note: "Let's connect" },
   { icon: "📍", label: "Location", value: "Scarborough, ON", href: null, note: "Greater Toronto Area" },
 ];
 
@@ -180,7 +180,14 @@ export default function Contact() {
                     </div>
                   );
                   return item.href ? (
-                    <a key={item.label} href={item.href} className="block hover:opacity-80 transition-opacity">
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      {...(item.href.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      className="block hover:opacity-80 transition-opacity"
+                    >
                       {inner}
                     </a>
                   ) : (
