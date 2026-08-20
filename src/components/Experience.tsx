@@ -152,7 +152,7 @@ function StrengthBar({ name, level }: { name: string; level: number }) {
 
 function IdentityHologram() {
   return (
-    <div className="relative w-full max-w-[460px] mx-auto" aria-hidden="true">
+    <div className="relative w-full max-w-[620px] lg:max-w-[760px] mx-auto lg:-my-8" aria-hidden="true">
       <div
         className="absolute inset-0 blur-3xl opacity-50 pointer-events-none"
         style={{
