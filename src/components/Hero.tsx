@@ -83,13 +83,7 @@ export default function Hero() {
                 height={1096}
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="relative w-full h-auto animate-float-slow mix-blend-screen"
-                style={{
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse 100% 100% at 50% 50%, #000 82%, transparent 100%)",
-                  maskImage:
-                    "radial-gradient(ellipse 100% 100% at 50% 50%, #000 82%, transparent 100%)",
-                }}
+                className="relative w-full h-auto animate-float-slow"
               />
             </div>
           </Reveal>
