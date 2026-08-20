@@ -107,6 +107,13 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="/Alex_Philip_Resume.pdf"
+                download
+                className="ml-2 px-3 py-1.5 text-sm font-mono rounded-md flex items-center gap-1.5 text-terminal-bg bg-gradient-to-r from-terminal-cyan to-terminal-green hover:shadow-glow-cyan transition-all font-semibold"
+              >
+                ↓ resume
+              </a>
             </div>
 
             {/* Mobile hamburger button — 44×44 touch target */}
@@ -139,6 +146,14 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="/Alex_Philip_Resume.pdf"
+                download
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 px-3 min-h-[44px] text-sm font-mono text-terminal-cyan hover:bg-terminal-cyan/10 rounded transition-all font-semibold"
+              >
+                ↓ download_resume
+              </a>
             </div>
           </div>
         )}

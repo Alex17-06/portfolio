@@ -2,23 +2,50 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.alexphilip.ca"),
   title: "Alex Philip | Microsoft 365 & Cloud Systems Administrator",
   description:
     "Portfolio of Alex Philip — Microsoft 365 & Cloud Systems Administrator with expertise in Entra ID, Zero Trust, endpoint security, and incident response.",
   keywords: [
+    "Microsoft 365 administrator",
+    "Cloud systems administrator",
+    "Azure Entra ID",
+    "Zero Trust",
+    "Conditional Access",
+    "Microsoft Defender",
+    "Intune",
     "cybersecurity",
-    "cloud security",
-    "Azure",
-    "Microsoft 365",
-    "IT specialist",
-    "portfolio",
+    "Alex Philip",
+    "IT portfolio",
   ],
   authors: [{ name: "Alex Philip" }],
+  creator: "Alex Philip",
+  alternates: {
+    canonical: "https://www.alexphilip.ca",
+  },
   openGraph: {
     title: "Alex Philip | Microsoft 365 & Cloud Systems Administrator",
     description:
       "Microsoft 365 & Cloud Systems Administrator with hands-on experience managing hybrid Entra ID environments and Zero Trust architecture.",
+    url: "https://www.alexphilip.ca",
+    siteName: "Alex Philip Portfolio",
+    locale: "en_CA",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Alex Philip | Microsoft 365 & Cloud Systems Administrator",
+    description:
+      "Microsoft 365 & Cloud Systems Administrator — Entra ID, Zero Trust, Defender, and incident response.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
   },
 };
 

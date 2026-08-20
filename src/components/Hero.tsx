@@ -125,6 +125,13 @@ export default function Hero() {
             <a href="#projects" className="btn-ghost">
               <span>&gt;</span> view_projects()
             </a>
+            <a
+              href="/Alex_Philip_Resume.pdf"
+              download
+              className="btn-ghost"
+            >
+              <span>↓</span> download_resume()
+            </a>
           </div>
         </div>
 
