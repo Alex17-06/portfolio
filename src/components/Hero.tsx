@@ -69,10 +69,10 @@ export default function Hero() {
             <div className="relative">
               {/* soft glow behind */}
               <div
-                className="absolute inset-0 blur-3xl opacity-40 pointer-events-none"
+                className="absolute inset-0 blur-3xl opacity-50 pointer-events-none"
                 style={{
                   background:
-                    "radial-gradient(circle at 50% 45%, rgba(47,107,255,0.4), transparent 60%)",
+                    "radial-gradient(circle at 50% 45%, rgba(47,107,255,0.45), transparent 62%)",
                 }}
                 aria-hidden="true"
               />
@@ -83,7 +83,13 @@ export default function Hero() {
                 height={1096}
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="relative w-full h-auto animate-float-slow"
+                className="relative w-full h-auto animate-float-slow mix-blend-screen"
+                style={{
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 100% 100% at 50% 50%, #000 82%, transparent 100%)",
+                  maskImage:
+                    "radial-gradient(ellipse 100% 100% at 50% 50%, #000 82%, transparent 100%)",
+                }}
               />
             </div>
           </Reveal>
