@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import SectionHeader from "./SectionHeader";
 import Reveal from "./Reveal";
 
@@ -32,10 +33,22 @@ const jobs: Job[] = [
     summary:
       "Administering a hybrid Microsoft 365 environment across a multi-company organization, hardening identity and endpoints.",
     highlights: [
-      "Raised the Microsoft Secure Score from 35% to 80% by remediating identity, device, and data recommendations.",
-      "Administered Entra ID — provisioning, groups, roles, and Conditional Access for 600+ users.",
-      "Managed Exchange Online, Teams, SharePoint, and OneDrive across 6 companies (250 users).",
-      "Configured Microsoft Defender for Endpoint; contained 200+ phishing, spoofing, and fraud incidents.",
+      "Provided Tier 2–3 technical support in a hybrid Microsoft 365 environment, supporting end users across Windows endpoints, cloud services, and identity platforms.",
+      "Improved tenant security posture by raising the Microsoft Secure Score from 35% to 80% (a 45-point gain) by remediating identity, device, and data recommendations.",
+      "Administered Microsoft Entra ID (Azure AD) including user provisioning, group management, role assignments, and Conditional Access policy enforcement.",
+      "Managed Microsoft 365 services (Exchange Online, Teams, SharePoint, OneDrive), including mailbox issues, permissions, licensing, and service troubleshooting.",
+      "Collaborated closely with the CTO on implementing IT policies, security controls, and operational improvements.",
+      "Migrated on-premises server infrastructure to a fully cloud-based environment, improving scalability and system availability.",
+      "Secured enterprise identity by managing Entra ID access controls including MFA, FIDO2, Conditional Access, RBAC, and security-group management.",
+      "Led infrastructure upgrades, including modernization of on-premises network environments across multiple offices.",
+      "Configured and maintained network infrastructure across multiple offices, including routers, switches, and firewalls, ensuring stable and secure connectivity.",
+      "Deployed, configured, and managed endpoints using Intune and Atera, including device onboarding, configuration profiles, compliance policies, and update management.",
+      "Configured and monitored Microsoft Defender for Endpoint, investigated security alerts, performed threat analysis, and remediated compromised or non-compliant devices/users.",
+      "Enforced MFA across the organization; performed resets, troubleshot authentication issues, and reviewed sign-in risk events.",
+      "Investigated and responded to phishing, spoofing, and suspicious email activity, including message tracing, user education, and remediation actions.",
+      "Dealt with VPN connectivity issues, network access problems, and identity-related sign-in failures in hybrid environments.",
+      "Performed regular updates, system checks, and managed server infrastructure.",
+      "Collaborated with DevOps teams to support development and deployment of custom internal tools and applications.",
     ],
   },
   {
@@ -50,10 +63,10 @@ const jobs: Job[] = [
     summary:
       "Supported computer labs and HyFlex classrooms, ensuring operational readiness and quick issue resolution.",
     highlights: [
-      "Resolved issues with AIOs, Crestron touch panels, AV gear, projectors, and screens.",
-      "Managed IT equipment inventory for accurate tracking and availability.",
+      "Resolved technical issues with computers (AIOs), Crestron touch panels, AV gear, projectors, screens, and more.",
+      "Managed inventory for IT equipment, ensuring accurate tracking and availability.",
       "Reimaged and deployed laptops for professors and students during the hardware sale.",
-      "Installed and configured classroom computers and podiums to institutional standards.",
+      "Installed and configured computers in classrooms, reimaged classroom computers, and teacher podiums to meet institutional standards.",
     ],
   },
   {
@@ -68,10 +81,12 @@ const jobs: Job[] = [
     summary:
       "Delivered tier 1 & 2 IT support across hardware and software platforms, aligned with ITIL practices.",
     highlights: [
-      "Created and managed user accounts in Active Directory and performed policy-based access control.",
-      "Provided comprehensive IT orientations to all new hires for smooth onboarding.",
-      "Managed corporate laptop builds, mobile device reimaging, and deployment processes.",
-      "Conducted hardware asset tagging via SAP and coordinated Dell part replacements.",
+      "Provided tier 1 & 2 IT support across various hardware and software platforms, ensuring alignment with ITIL practices.",
+      "Created and managed user accounts in Active Directory (AD) and performed access control based on company policies.",
+      "Provided comprehensive IT orientations to all new hires, ensuring a smooth onboarding process.",
+      "Successfully managed corporate laptop builds, mobile device reimaging, and deployment processes.",
+      "Conducted hardware asset tagging and managed records through SAP.",
+      "Worked closely with Dell for multiple part replacements, ensuring efficient and effective resolution of hardware issues through collaboration with external vendors.",
     ],
   },
 ];
@@ -100,13 +115,6 @@ const strengths = [
 const tools = [
   "Entra ID", "Azure", "Intune", "Defender", "Exchange",
   "PowerShell", "ServiceNow", "Atera", "Windows Server",
-];
-
-const floatingLabels = [
-  { title: "CLOUD SECURITY", pos: "top-[2%] left-[0%]" },
-  { title: "THREAT DETECTION", pos: "top-[38%] left-[-6%]" },
-  { title: "RISK MANAGEMENT", pos: "top-[6%] right-[-2%]" },
-  { title: "SECURE ARCHITECTURE", pos: "bottom-[14%] right-[-4%]" },
 ];
 
 function StrengthBar({ name, level }: { name: string; level: number }) {
@@ -144,64 +152,22 @@ function StrengthBar({ name, level }: { name: string; level: number }) {
 
 function IdentityHologram() {
   return (
-    <div className="relative w-full max-w-[420px] mx-auto hidden md:block" aria-hidden="true">
-      <svg viewBox="0 0 420 360" className="w-full h-auto">
-        <defs>
-          <linearGradient id="expShield" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#8ec6ff" />
-            <stop offset="1" stopColor="#2f6bff" />
-          </linearGradient>
-          <radialGradient id="expGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stopColor="#4f8bff" stopOpacity="0.8" />
-            <stop offset="1" stopColor="#4f8bff" stopOpacity="0" />
-          </radialGradient>
-          <linearGradient id="expRing" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#2f6bff" stopOpacity="0" />
-            <stop offset="0.5" stopColor="#60a5fa" stopOpacity="0.9" />
-            <stop offset="1" stopColor="#2f6bff" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
-        <circle cx="210" cy="150" r="130" fill="url(#expGlow)" opacity="0.4" />
-
-        {/* Shield with person */}
-        <g className="animate-float" style={{ transformOrigin: "210px 150px" }}>
-          <path
-            d="M210 40 L280 68 V150 C280 205 248 232 210 250 C172 232 140 205 140 150 V68 Z"
-            fill="#0b1120"
-            fillOpacity="0.5"
-            stroke="url(#expShield)"
-            strokeWidth="2.5"
-          />
-          {/* person */}
-          <circle cx="210" cy="128" r="22" fill="none" stroke="url(#expShield)" strokeWidth="2.5" />
-          <path
-            d="M175 192 a35 32 0 0 1 70 0"
-            fill="none"
-            stroke="url(#expShield)"
-            strokeWidth="2.5"
-          />
-        </g>
-
-        {/* Podium rings */}
-        <ellipse cx="210" cy="300" rx="150" ry="34" fill="none" stroke="url(#expRing)" strokeWidth="2" opacity="0.7" />
-        <ellipse cx="210" cy="308" rx="105" ry="24" fill="none" stroke="url(#expRing)" strokeWidth="2" opacity="0.5" />
-        <ellipse cx="210" cy="314" rx="62" ry="14" fill="none" stroke="url(#expRing)" strokeWidth="2" opacity="0.35" />
-        {/* beam */}
-        <rect x="205" y="250" width="10" height="60" fill="url(#expGlow)" opacity="0.5" />
-      </svg>
-
-      {floatingLabels.map((l) => (
-        <div
-          key={l.title}
-          className={`absolute ${l.pos} card-flat px-3 py-2 flex items-center gap-2 animate-float`}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-light shrink-0" />
-          <span className="font-mono text-[0.58rem] tracking-wider text-brand-light font-semibold whitespace-nowrap">
-            {l.title}
-          </span>
-        </div>
-      ))}
+    <div className="relative w-full max-w-[460px] mx-auto" aria-hidden="true">
+      <div
+        className="absolute inset-0 blur-3xl opacity-50 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 45%, rgba(47,107,255,0.4), transparent 62%)",
+        }}
+      />
+      <Image
+        src="/experience-shield.png"
+        alt=""
+        width={1449}
+        height={1085}
+        sizes="(max-width: 1024px) 100vw, 45vw"
+        className="relative w-full h-auto animate-float-slow"
+      />
     </div>
   );
 }
@@ -370,26 +336,6 @@ export default function Experience() {
             </Reveal>
           </div>
         </div>
-
-        {/* CTA banner */}
-        <Reveal className="mt-10">
-          <div className="card p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4 text-center sm:text-left">
-              <span className="icon-tile w-12 h-12 text-xl hidden sm:flex shrink-0">🚀</span>
-              <div>
-                <h3 className="font-display text-lg font-bold text-white">
-                  Let&apos;s build a more secure future together.
-                </h3>
-                <p className="text-slate-400 text-sm mt-0.5">
-                  I&apos;m always open to new opportunities and exciting projects.
-                </p>
-              </div>
-            </div>
-            <a href="#contact" className="btn-blue shrink-0">
-              Get In Touch <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
